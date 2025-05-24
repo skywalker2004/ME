@@ -4,39 +4,190 @@
 
 @layer components {
     .cta-button {
-        @apply bg-primary text-white px-6 py-3 rounded-lg shadow-md transition-all duration-300;
+        @apply bg-primary text-white px-6 py-3 rounded-lg shadow-md transition-all duration-300 font-semibold hover:bg-blue-700 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500;
     }
     .project-card {
-        @apply bg-white dark:bg-gray-900 p-6 rounded-xl shadow-lg overflow-hidden;
+        @apply bg-white dark:bg-gray-900 p-6 rounded-xl shadow-lg overflow-hidden relative border border-gray-200 dark:border-gray-700 hover:shadow-2xl hover:scale-[1.02] transition-all duration-300;
+    }
+    .testimonial-card {
+        @apply bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg text-center border border-gray-200 dark:border-gray-700 hover:shadow-xl hover:scale-[1.02] transition-all duration-300;
+    }
+    .skill-icon {
+        @apply w-16 h-16 mx-auto mb-2 transition-transform duration-300 hover:scale-110 hover:brightness-110;
     }
 }
 
-.project-card:hover img {
-    @apply transform scale-105 transition-transform duration-300;
-}
-
-.project-card:hover {
-    @apply shadow-2xl;
-}
-
-input:focus, textarea:focus {
-    @apply outline-none ring-2 ring-primary transition-shadow duration-300;
+@layer base {
+    html {
+        @apply scroll-smooth;
+    }
+    body {
+        @apply font-inter bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 text-gray-900 dark:text-gray-100 antialiased transition-colors duration-300;
+        background-image: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, rgba(0, 0, 0, 0) 70%);
+    }
+    h1 {
+        @apply text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tight text-white;
+    }
+    h2 {
+        @apply text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-12 tracking-wide text-gray-900 dark:text-gray-100;
+    }
+    a {
+        @apply hover:text-primary transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary;
+    }
 }
 
 .hero-bg {
-    @apply bg-cover bg-center opacity-70;
-    transition: transform 0.1s ease;
+    @apply absolute inset-0 bg-cover bg-center opacity-70;
+    transition: transform 0.3s ease-out; /* Smoother parallax effect */
 }
 
-.testimonial img {
-    @apply border-4 border-primary transition-transform duration-300;
+.hero-content {
+    @apply relative z-10 flex items-center justify-center h-full text-center px-6 bg-black bg-opacity-50 backdrop-blur-md rounded-lg shadow-xl;
 }
 
-.testimonial img:hover {
-    @apply scale-110;
+.project-card:hover img {
+    @apply transform scale-105 transition-transform duration-300 ease-out;
 }
 
-body {
-    @apply font-inter;
-    background-image: radial-gradient(circle, rgba(59,130,246,0.1) 0%, rgba(0,0,0,0) 70%);
+.project-card:hover {
+    @apply border-primary;
+}
+
+.testimonial-card:hover {
+    @apply border-primary;
+}
+
+.testimonial-card img {
+    @apply border-4 border-primary transition-transform duration-300 ease-in-out;
+}
+
+.testimonial-card img:hover {
+    @apply scale-110 rotate-3 brightness-110;
+}
+
+.cta-button.bg-gray-100 {
+    @apply text-gray-900 hover:bg-gray-200 hover:text-gray-800 focus:ring-gray-500;
+}
+
+.cta-button:hover {
+    @apply shadow-lg brightness-110;
+}
+
+.cta-button:active {
+    @apply scale-95 brightness-90;
+}
+
+#theme-toggle {
+    @apply p-2 rounded-full bg-gray-200 dark:bg-gray-700 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500;
+}
+
+#theme-toggle:hover {
+    @apply bg-gray-300 dark:bg-gray-600 scale-110 brightness-110;
+}
+
+#scroll-to-top {
+    @apply transition-all duration-300 opacity-0 fixed bottom-8 right-8 p-3 bg-primary text-white rounded-full shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500;
+}
+
+#scroll-to-top.visible {
+    @apply opacity-100;
+}
+
+#scroll-to-top:hover {
+    @apply bg-blue-700 scale-110 brightness-110;
+}
+
+#scroll-to-top:active {
+    @apply scale-95 brightness-90;
+}
+
+[data-aos] {
+    @apply transition-all duration-1000 ease-in-out;
+}
+
+[data-aos="fade-up"] {
+    @apply opacity-0 translate-y-10;
+}
+
+[data-aos="zoom-in"] {
+    @apply opacity-0 scale-90;
+}
+
+[data-aos="slide-up"] {
+    @apply opacity-0 translate-y-20;
+}
+
+[data-aos].aos-animate {
+    @apply opacity-100 translate-y-0 scale-100;
+}
+
+/* Enhance form inputs */
+input, textarea {
+    @apply border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-300 placeholder-gray-400 dark:placeholder-gray-500;
+}
+
+/* Add subtle glow on hover for nav links */
+nav a:hover {
+    @apply text-primary relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-primary after:scale-x-0 after:origin-left after:transition-transform after:duration-300 after:ease-out;
+}
+
+nav a:hover:after {
+    @apply scale-x-100;
+}
+
+/* Footer link hover effect */
+footer a:hover i {
+    @apply scale-125 brightness-110 transition-transform duration-200;
+}
+
+/* Smooth section transitions */
+section {
+    @apply transition-opacity duration-500 ease-in-out;
+}
+
+/* New enhancements */
+.hero-content h1 {
+    @apply text-shadow-md; /* Custom utility for subtle text shadow */
+}
+
+.hero-content p {
+    @apply text-shadow-sm; /* Custom utility for subtle text shadow */
+}
+
+.text-shadow-md {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.text-shadow-sm {
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+    .hero-content {
+        @apply px-4;
+    }
+    .cta-button {
+        @apply w-full;
+    }
+    h1 {
+        @apply text-3xl sm:text-4xl;
+    }
+    h2 {
+        @apply text-2xl sm:text-3xl;
+    }
+}
+
+/* Card image hover effect */
+.project-card img {
+    @apply transition-transform duration-300 ease-in-out;
+}
+
+.testimonial-card img {
+    @apply transition-transform duration-300 ease-in-out;
+}
+
+/* Enhanced focus states */
+:focus-visible {
+    @apply outline-none ring-2 ring-offset-2 ring-primary;
 }

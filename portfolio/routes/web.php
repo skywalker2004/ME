@@ -6,17 +6,16 @@ use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\TestimonialController;
 use App\Http\Controllers\BlogPostController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    $projects = \App\Models\Project::all();
-    $services = \App\Models\Service::all();
-    $testimonials = \App\Models\Testimonial::all();
-    return view('welcome', compact('projects', 'services', 'testimonials'));
-})->name('home');
+Route::middleware(['web'])->group(function () {
+    Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::get('/projects', [ProjectController::class, 'index'])->name('projects');
-Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+    Route::get('/projects', [ProjectController::class, 'index'])->name('projects');
+
+    Route::post('/contact', [ContactController::class, 'store'])->name('contact');
+});
 
 Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::get('/dashboard', function () {

@@ -10,17 +10,18 @@ class ContactForm extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $contact;
+    public $data;
 
-    public function __construct($contact)
+    public function __construct($data)
     {
-        $this->contact = $contact;
+        $this->data = $data;
     }
 
     public function build()
     {
-        return $this->subject('New Contact Form Submission')
+        return $this->from('kelvinkiprono659@gmail.com')
+                    ->subject('New Contact Form Submission')
                     ->view('emails.contact')
-                    ->with(['contact' => $this->contact]);
+                    ->with('data', $this->data);
     }
 }
